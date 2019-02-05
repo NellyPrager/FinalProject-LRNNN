@@ -1,14 +1,18 @@
 package factoryProject.Repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import factoryProject.Model.Materiel;
+import factoryProject.Model.Salle;
 
 @Repository
-public interface RepositoryMateriel extends JpaRepository<Materiel, String> {
-//	List<Ordinateur> findAllFormateur() ;
-//	List<Salle> findAllStagiaire() ;
+
+public interface RepositorySalle extends JpaRepository<Materiel, String> {
+
+	List<Salle> findAllSalle() ;
 //	List<VideoProjecteur> findAllVideoProjecteur() ;
 
 }

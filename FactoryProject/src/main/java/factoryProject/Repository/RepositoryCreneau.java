@@ -3,9 +3,9 @@ package factoryProject.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import factoryProject.Model.Module;
+import factoryProject.Model.Creneau;
 
 @Repository
-public interface RepositoryModule extends JpaRepository<Module, Long> {
+public interface RepositoryCreneau extends JpaRepository<Creneau, Long>{
 
 }

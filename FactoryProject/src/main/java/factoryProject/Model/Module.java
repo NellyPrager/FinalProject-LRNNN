@@ -1,5 +1,5 @@
 package factoryProject.Model;
 
-public class ModuleFormation {
+public class Module {
 
 }

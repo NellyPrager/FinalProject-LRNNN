@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -28,6 +30,8 @@ public class Formation {
 	@OneToMany(mappedBy = "formation")
 	@JsonView(JsonViews.FormationWithInterns.class)
 	private List<Stagiaire> interns = new ArrayList<>();
+	@Enumerated(EnumType.STRING)
+	private TypeFormation formationType;
 
 	public Formation() {
 		super();

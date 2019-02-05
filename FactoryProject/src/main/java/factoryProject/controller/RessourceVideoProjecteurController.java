@@ -28,32 +28,30 @@ import factoryProject.Model.Materiel;
 import factoryProject.Model.VideoProjecteur;
 import factoryProject.Repository.RepositoryVideoProjecteur;
 
-
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/material")
 public class RessourceVideoProjecteurController {
-	
+
 	@Autowired
 	RepositoryVideoProjecteur repositoryVideoProjector;
-	
+
 	@GetMapping(path = { "", "/" })
 	@JsonView(JsonViews.Common.class)
 	public ResponseEntity<List<VideoProjecteur>> findAll() {
 		return new ResponseEntity<>(repositoryVideoProjector.findAllVideoProjector(), HttpStatus.OK);
 	}
 
-
 	@PostMapping(path = { "", "/" })
-	public ResponseEntity<Void> createComputer(@Valid @RequestBody Materiel videoProjector, BindingResult br,
+	public ResponseEntity<Void> createComputer(@Valid @RequestBody Salle room, BindingResult br,
 			UriComponentsBuilder uCB) {
 		ResponseEntity<Void> response = null;
 		if (br.hasErrors()) {
 			response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		} else {
-			repositoryVideoProjector.save(videoProjector);
+			repositoryRoom.save(room);
 			HttpHeaders header = new HttpHeaders();
-			header.setLocation(uCB.path("/rest/videoProjector/{code}").buildAndExpand(videoProjector.getCode()).toUri());
+			header.setLocation(uCB.path("/rest/room/{code}").buildAndExpand(room.getCode()).toUri());
 			response = new ResponseEntity<>(header, HttpStatus.CREATED);
 		}
 		return response;
@@ -65,7 +63,7 @@ public class RessourceVideoProjecteurController {
 		Optional<Materiel> opt = repositoryVideoProjector.findById(code);
 		ResponseEntity<VideoProjecteur> response = null;
 		if (opt.isPresent()) {
-			response = new ResponseEntity<VideoProjecteur>((VideoProjecteur)opt.get(), HttpStatus.OK);
+			response = new ResponseEntity<Salle>((Salle)opt.get(), HttpStatus.OK);
 		} else {
 			response = new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
@@ -80,13 +78,14 @@ public class RessourceVideoProjecteurController {
 		if (br.hasErrors() || videoProjector.getCode() == null) {
 			response = new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
 		} else {
-			Optional<Materiel> opt = repositoryVideoProjector.findById(videoProjector.getCode());
+			Optional<Materiel> opt = repositoryRoom.findById(room.getCode());
 			if (opt.isPresent()) {
-				VideoProjecteur videoProjectorEnBase = (VideoProjecteur)opt.get();
-				videoProjectorEnBase.setRoom(videoProjector.getRoom());
-				
-				repositoryVideoProjector.save(videoProjectorEnBase);
-				response = new ResponseEntity<VideoProjecteur>(videoProjectorEnBase, HttpStatus.OK);
+				Salle salleEnBase = (Salle)opt.get();
+				salleEnBase.setCode(room.getCode());
+				salleEnBase.setCapacity(room.getCapacity());
+				salleEnBase.setPrice(room.getPrice());
+				repositoryRoom.save(salleEnBase);
+				response = new ResponseEntity<Salle>(salleEnBase, HttpStatus.OK);
 			} else {
 				response = new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
 			}
@@ -106,6 +105,5 @@ public class RessourceVideoProjecteurController {
 		}
 		return response;
 	}
-
 
 }

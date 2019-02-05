@@ -26,13 +26,14 @@ public class Ordinateur extends Materiel{
 	
 	@Version
 	private int version;
+	@Column(name="ram")
 	@JsonView(JsonViews.Common.class)
 	private int ram;
-	@Column
+	@Column(name="hard_disk")
 	@JsonView(JsonViews.Common.class)
 	private int hardDisk;
 	
-	@Column(name="year of purchase")
+	@Column(name="year_of_purchase")
 	@Temporal(TemporalType.DATE)
 	private Date year;
 	

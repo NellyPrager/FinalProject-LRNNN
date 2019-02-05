@@ -16,5 +16,9 @@ public class JsonViews {
 	public static class Salle extends Common{
 		
 	}
+	
+	public static class FormationWithInterns extends Common {
+
+	}
 }
 

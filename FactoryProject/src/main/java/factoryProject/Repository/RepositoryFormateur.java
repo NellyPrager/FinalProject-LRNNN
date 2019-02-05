@@ -11,7 +11,7 @@ import factoryProject.Model.RessourceHumaine;
 	@Repository
 	public interface RepositoryFormateur extends JpaRepository<RessourceHumaine, Long>{
 
-		@Query("select distinct formateur from trainers")
+		@Query("select distinct formateur from human_resources")
 		List<Formateur>findAllFormateur();
 
 		

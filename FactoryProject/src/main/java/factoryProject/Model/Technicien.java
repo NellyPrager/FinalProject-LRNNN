@@ -8,7 +8,6 @@ import javax.persistence.Table;
 
 @Entity
 @DiscriminatorValue("technicien")
-@Table(name="technicians")
 public class Technicien extends RessourceHumaine{
 	
 	@Column(name="username")

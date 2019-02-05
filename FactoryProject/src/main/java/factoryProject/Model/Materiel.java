@@ -10,13 +10,16 @@ import javax.persistence.Version;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "type")
+@DiscriminatorColumn(name = "material")
 public abstract class Materiel {
 	@Id
+	@Column
 	private String code;
 	@Version
 	private int version;
+	@Column
 	private int price;
+	@Column
 	private boolean availability;
 	
 	

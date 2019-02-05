@@ -25,8 +25,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import factoryProject.Model.JsonViews;
 import factoryProject.Model.Materiel;
-import factoryProject.Model.Salle;
-import factoryProject.Repository.RepositorySalle;
+import factoryProject.Model.VideoProjecteur;
 import factoryProject.Repository.RepositoryVideoProjecteur;
 
 
@@ -40,21 +39,21 @@ public class RessourceVideoProjecteurController {
 	
 	@GetMapping(path = { "", "/" })
 	@JsonView(JsonViews.Common.class)
-	public ResponseEntity<List<Salle>> findAll() {
-		return new ResponseEntity<>(repositoryVideoProjector.findAllRoom(), HttpStatus.OK);
+	public ResponseEntity<List<VideoProjecteur>> findAll() {
+		return new ResponseEntity<>(repositoryVideoProjector.findAllVideoProjector(), HttpStatus.OK);
 	}
 
 
 	@PostMapping(path = { "", "/" })
-	public ResponseEntity<Void> createComputer(@Valid @RequestBody Salle room, BindingResult br,
+	public ResponseEntity<Void> createComputer(@Valid @RequestBody Materiel videoProjector, BindingResult br,
 			UriComponentsBuilder uCB) {
 		ResponseEntity<Void> response = null;
 		if (br.hasErrors()) {
 			response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		} else {
-			repositoryRoom.save(room);
+			repositoryVideoProjector.save(videoProjector);
 			HttpHeaders header = new HttpHeaders();
-			header.setLocation(uCB.path("/rest/room/{code}").buildAndExpand(room.getCode()).toUri());
+			header.setLocation(uCB.path("/rest/videoProjector/{code}").buildAndExpand(videoProjector.getCode()).toUri());
 			response = new ResponseEntity<>(header, HttpStatus.CREATED);
 		}
 		return response;
@@ -62,11 +61,11 @@ public class RessourceVideoProjecteurController {
 
 	@GetMapping(value = "/{code}")
 	@JsonView(JsonViews.Common.class)
-	public ResponseEntity<Salle> findById(@PathVariable(name = "code") String code) {
-		Optional<Materiel> opt = repositoryRoom.findById(code);
-		ResponseEntity<Salle> response = null;
+	public ResponseEntity<VideoProjecteur> findById(@PathVariable(name = "code") String code) {
+		Optional<Materiel> opt = repositoryVideoProjector.findById(code);
+		ResponseEntity<VideoProjecteur> response = null;
 		if (opt.isPresent()) {
-			response = new ResponseEntity<Salle>((Salle)opt.get(), HttpStatus.OK);
+			response = new ResponseEntity<VideoProjecteur>((VideoProjecteur)opt.get(), HttpStatus.OK);
 		} else {
 			response = new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
@@ -75,20 +74,19 @@ public class RessourceVideoProjecteurController {
 
 	@JsonView(JsonViews.Common.class)
 	@PutMapping(path = { "", "/" })
-	public ResponseEntity<Salle> update(@Valid @RequestBody Salle room, BindingResult br) {
-		ResponseEntity<Salle> response = null;
+	public ResponseEntity<VideoProjecteur> update(@Valid @RequestBody VideoProjecteur videoProjector, BindingResult br) {
+		ResponseEntity<VideoProjecteur> response = null;
 
-		if (br.hasErrors() || room.getCode() == null) {
+		if (br.hasErrors() || videoProjector.getCode() == null) {
 			response = new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
 		} else {
-			Optional<Materiel> opt = repositoryRoom.findById(room.getCode());
+			Optional<Materiel> opt = repositoryVideoProjector.findById(videoProjector.getCode());
 			if (opt.isPresent()) {
-				Salle salleEnBase = (Salle)opt.get();
-				salleEnBase.setCode(room.getCode());
-				salleEnBase.setCapacity(room.getCapacity());
-				salleEnBase.setPrice(room.getPrice());
-				repositoryRoom.save(salleEnBase);
-				response = new ResponseEntity<Salle>(salleEnBase, HttpStatus.OK);
+				VideoProjecteur videoProjectorEnBase = (VideoProjecteur)opt.get();
+				videoProjectorEnBase.setRoom(videoProjector.getRoom());
+				
+				repositoryVideoProjector.save(videoProjectorEnBase);
+				response = new ResponseEntity<VideoProjecteur>(videoProjectorEnBase, HttpStatus.OK);
 			} else {
 				response = new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
 			}
@@ -98,10 +96,10 @@ public class RessourceVideoProjecteurController {
 
 	@DeleteMapping(value = "/{code}")
 	public ResponseEntity<Void> delete(@PathVariable(name = "code") String code) {
-		Optional<Materiel> opt = repositoryRoom.findById(code);
+		Optional<Materiel> opt = repositoryVideoProjector.findById(code);
 		ResponseEntity<Void> response = null;
 		if (opt.isPresent()) {
-			repositoryRoom.deleteById(code);
+			repositoryVideoProjector.deleteById(code);
 			response = new ResponseEntity<>(HttpStatus.OK);
 		} else {
 			response = new ResponseEntity<>(HttpStatus.NO_CONTENT);

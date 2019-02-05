@@ -21,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 public class Ordinateur extends Materiel{
 	
 	@JsonView(JsonViews.Common.class)
+	@Column
 	private String processor;
 	
 	@Version

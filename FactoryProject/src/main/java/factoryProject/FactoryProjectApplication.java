@@ -8,6 +8,7 @@ public class FactoryProjectApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(FactoryProjectApplication.class, args);
+		//testFormation();
 	}
 
 }

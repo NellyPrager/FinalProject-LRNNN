@@ -10,7 +10,6 @@ import javax.persistence.Table;
 
 @Entity
 @DiscriminatorValue("stagiaire")
-@Table(name="interns")
 public class Stagiaire extends RessourceHumaine{
 
 @Column(name="password")

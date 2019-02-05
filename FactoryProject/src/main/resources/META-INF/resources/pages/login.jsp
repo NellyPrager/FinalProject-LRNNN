@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%-- 	<div>${param.error}</div> --%>
+	<div>${param.error}</div>
 	<div>
 		<form action="" method="post">
 			<table>
@@ -24,6 +24,7 @@
 				</tr>
 			</table>
 		</form>
+		<a href="/formation">Formation</a>
 	</div>
 </body>
 </html>

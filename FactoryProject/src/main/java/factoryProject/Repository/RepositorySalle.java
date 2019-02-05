@@ -12,7 +12,7 @@ import factoryProject.Model.Salle;
 
 public interface RepositorySalle extends JpaRepository<Materiel, String> {
 
-	List<Salle> findAllSalle() ;
+	List<Salle> findAllRoom() ;
 //	List<VideoProjecteur> findAllVideoProjecteur() ;
 
 }

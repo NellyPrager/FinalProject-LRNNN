@@ -37,7 +37,7 @@ public class Ordinateur extends Materiel{
 	
 	@Column
 	@OneToOne(mappedBy="computer")
-	private Intern intern;
+	private Stagiaire intern;
 
 	
 	
@@ -46,7 +46,7 @@ public class Ordinateur extends Materiel{
 	}
 
 
-	public Ordinateur(int ram, int hardDisk, Date year, Intern intern) {
+	public Ordinateur(int ram, int hardDisk, Date year, Stagiaire intern) {
 		super();
 		this.ram = ram;
 		this.hardDisk = hardDisk;
@@ -105,14 +105,16 @@ public class Ordinateur extends Materiel{
 	}
 
 
-	public Intern getIntern() {
+	public Stagiaire getIntern() {
 		return intern;
 	}
 
 
-	public void setIntern(Intern intern) {
+	public void setIntern(Stagiaire intern) {
 		this.intern = intern;
 	}
+
+
 	
 	
 	

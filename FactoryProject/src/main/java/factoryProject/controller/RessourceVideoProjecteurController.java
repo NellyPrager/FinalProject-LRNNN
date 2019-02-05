@@ -1,7 +1,5 @@
 package factoryProject.controller;
 
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,57 +23,50 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-
 import factoryProject.Model.JsonViews;
 import factoryProject.Model.Materiel;
-import factoryProject.Model.Ordinateur;
-import factoryProject.Repository.RepositoryOrdinateur;
-
-
+import factoryProject.Model.Salle;
+import factoryProject.Repository.RepositorySalle;
+import factoryProject.Repository.RepositoryVideoProjecteur;
 
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/material")
-public class RessourceOrdinateurController {
+public class RessourceVideoProjecteurController {
 	
 	@Autowired
-	RepositoryOrdinateur repositoryComputer;
+	RepositoryVideoProjecteur repositoryVideoProjector;
 	
 	@GetMapping(path = { "", "/" })
 	@JsonView(JsonViews.Common.class)
-	public ResponseEntity<List<Ordinateur>> findAll() {
-		return new ResponseEntity<>(repositoryComputer.findAllComputer(), HttpStatus.OK);
+	public ResponseEntity<List<Salle>> findAll() {
+		return new ResponseEntity<>(repositoryVideoProjector.findAllRoom(), HttpStatus.OK);
 	}
 
-	@GetMapping(path = { "/intern" })
-	@JsonView(JsonViews.ComputerWithIntern.class)
-	public ResponseEntity<List<Ordinateur>> findAllWithInterns() {
-		return new ResponseEntity<>(repositoryComputer.findAllComputerWithInterns(), HttpStatus.OK);
-	}
 
 	@PostMapping(path = { "", "/" })
-	public ResponseEntity<Void> createComputer(@Valid @RequestBody Ordinateur computer, BindingResult br,
+	public ResponseEntity<Void> createComputer(@Valid @RequestBody Salle room, BindingResult br,
 			UriComponentsBuilder uCB) {
 		ResponseEntity<Void> response = null;
 		if (br.hasErrors()) {
 			response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		} else {
-			repositoryComputer.save(computer);
+			repositoryRoom.save(room);
 			HttpHeaders header = new HttpHeaders();
-			header.setLocation(uCB.path("/rest/computer/{code}").buildAndExpand(computer.getCode()).toUri());
+			header.setLocation(uCB.path("/rest/room/{code}").buildAndExpand(room.getCode()).toUri());
 			response = new ResponseEntity<>(header, HttpStatus.CREATED);
 		}
 		return response;
 	}
 
-	@GetMapping(value = "/{id}")
+	@GetMapping(value = "/{code}")
 	@JsonView(JsonViews.Common.class)
-	public ResponseEntity<Ordinateur> findById(@PathVariable(name = "code") String code) {
-		Optional<Materiel> opt = repositoryComputer.findById(code);
-		ResponseEntity<Ordinateur> response = null;
+	public ResponseEntity<Salle> findById(@PathVariable(name = "code") String code) {
+		Optional<Materiel> opt = repositoryRoom.findById(code);
+		ResponseEntity<Salle> response = null;
 		if (opt.isPresent()) {
-			response = new ResponseEntity<Ordinateur>((Ordinateur)opt.get(), HttpStatus.OK);
+			response = new ResponseEntity<Salle>((Salle)opt.get(), HttpStatus.OK);
 		} else {
 			response = new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
@@ -84,23 +75,20 @@ public class RessourceOrdinateurController {
 
 	@JsonView(JsonViews.Common.class)
 	@PutMapping(path = { "", "/" })
-	public ResponseEntity<Ordinateur> update(@Valid @RequestBody Ordinateur computer, BindingResult br) {
-		ResponseEntity<Ordinateur> response = null;
+	public ResponseEntity<Salle> update(@Valid @RequestBody Salle room, BindingResult br) {
+		ResponseEntity<Salle> response = null;
 
-		if (br.hasErrors() || computer.getCode() == null) {
+		if (br.hasErrors() || room.getCode() == null) {
 			response = new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
 		} else {
-			Optional<Materiel> opt = repositoryComputer.findById(computer.getCode());
+			Optional<Materiel> opt = repositoryRoom.findById(room.getCode());
 			if (opt.isPresent()) {
-				Ordinateur ordinateurEnBase = (Ordinateur)opt.get();
-				ordinateurEnBase.setCode(computer.getCode());
-				ordinateurEnBase.setHardDisk(computer.getHardDisk());
-				ordinateurEnBase.setPrice(computer.getPrice());
-				ordinateurEnBase.setProcessor(computer.getProcessor());
-				ordinateurEnBase.setRam(computer.getRam());
-				ordinateurEnBase.setYear(computer.getYear());
-				repositoryComputer.save(ordinateurEnBase);
-				response = new ResponseEntity<Ordinateur>(ordinateurEnBase, HttpStatus.OK);
+				Salle salleEnBase = (Salle)opt.get();
+				salleEnBase.setCode(room.getCode());
+				salleEnBase.setCapacity(room.getCapacity());
+				salleEnBase.setPrice(room.getPrice());
+				repositoryRoom.save(salleEnBase);
+				response = new ResponseEntity<Salle>(salleEnBase, HttpStatus.OK);
 			} else {
 				response = new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
 			}
@@ -110,15 +98,16 @@ public class RessourceOrdinateurController {
 
 	@DeleteMapping(value = "/{code}")
 	public ResponseEntity<Void> delete(@PathVariable(name = "code") String code) {
-		Optional<Materiel> opt = repositoryComputer.findById(code);
+		Optional<Materiel> opt = repositoryRoom.findById(code);
 		ResponseEntity<Void> response = null;
 		if (opt.isPresent()) {
-			repositoryComputer.deleteById(code);
+			repositoryRoom.deleteById(code);
 			response = new ResponseEntity<>(HttpStatus.OK);
 		} else {
 			response = new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 		return response;
 	}
+
 
 }

@@ -8,6 +8,6 @@ import factoryProject.Model.Matiere;
 import factoryProject.Model.VideoProjecteur;
 
 public interface RepositoryVideoProjecteur extends JpaRepository<Matiere, String>{
-	List<VideoProjecteur> findAllVideoProjecteur() ;
+	List<VideoProjecteur> findAllVideoProjector() ;
 
 }

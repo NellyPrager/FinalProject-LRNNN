@@ -46,15 +46,14 @@ public class Matiere {
 
 	@OneToMany(mappedBy = "matiere")
 	private List<MatiereFormateur> formateurs = new ArrayList<>();
-	
+
 	public Matiere() {
 		super();
 	}
 
-	public Matiere(int version, String title, int duration, ArrayList<String> objectives,
-			ArrayList<String> prerequisites, String content, Niveau level) {
+	public Matiere(String title, int duration, ArrayList<String> objectives, ArrayList<String> prerequisites,
+			String content, Niveau level) {
 		super();
-		this.version = version;
 		this.title = title;
 		this.duration = duration;
 		this.objectives = objectives;

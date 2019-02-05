@@ -22,7 +22,7 @@ import factoryProject.Repository.RepositoryMatiere;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/matiere")
+@RequestMapping("/")
 public class MatiereController {
 
 	@Autowired

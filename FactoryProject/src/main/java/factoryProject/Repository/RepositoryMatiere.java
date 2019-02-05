@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import factoryProject.Model.Matiere;
 
-@Repository
+@Repository(value="subject")
 public interface RepositoryMatiere extends JpaRepository<Matiere, Long>{
-
 }

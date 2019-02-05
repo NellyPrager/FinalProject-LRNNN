@@ -7,7 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.OneToOne;
+
 
 @Entity
 @DiscriminatorValue("formateur")
@@ -26,6 +27,9 @@ public class Formateur extends RessourceHumaine{
 	
 	@OneToMany(mappedBy="intern")
 	private List <Stagiaire> intern;
+	
+	@OneToOne(mappedBy= "trainer")
+	private Module module;
 
 	public String getMotDePasse() {
 		return motDePasse;

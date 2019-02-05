@@ -1,4 +1,4 @@
-package LRNNN.finalProject.FactoryProject;
+package factoryProject;
 
 import java.util.ArrayList;
 import java.util.List;

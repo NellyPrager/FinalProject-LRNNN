@@ -31,7 +31,6 @@ import factoryProject.Repository.RepositoryFormation;
 
 @CrossOrigin(origins = "{*}")
 @RestController
-@ComponentScan
 @RequestMapping("/formation")
 //module de gestion des planning les mecs, siiiii sii
 public class FormationController {

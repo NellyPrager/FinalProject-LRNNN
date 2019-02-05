@@ -1,5 +1,34 @@
 package factoryProject.Model;
 
-public class Technicien extends RessourceHumaine{
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
+
+@Entity
+@DiscriminatorValue("technicien")
+@Table(name="technicians")
+public class Technicien extends RessourceHumaine{
+	
+	@Column(name="username")
+	private String username;
+
+	@Column(name="password")
+	private String motDePasse;
+
+	public String getMotDePasse() {
+		return motDePasse;
+	}
+
+	public void setMotDePasse(String motDePasse) {
+		this.motDePasse = motDePasse;
+	}
+
+	public Technicien(String motDePasse) {
+		super();
+		this.motDePasse = motDePasse;
+	}
+	
+	public Technicien() {}
 }

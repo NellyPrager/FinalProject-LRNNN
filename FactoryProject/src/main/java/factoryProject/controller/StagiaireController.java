@@ -1,5 +1,6 @@
 package factoryProject.controller;
 
+
 import java.util.List;
 import java.util.Optional;
 
@@ -22,36 +23,35 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import factoryProject.Model.Formateur;
 import factoryProject.Model.JsonViews;
 import factoryProject.Model.RessourceHumaine;
-
-import factoryProject.Repository.RepositoryFormateur;
+import factoryProject.Model.Stagiaire;
+import factoryProject.Repository.RepositoryStagiaire;
 
 @CrossOrigin(origins = "http://localhost:4200")
-// @RequestMapping("/rest/personne/stagiaire")
+//@RequestMapping("/rest/personne/stagiaire")
 @RestController
-public class FormateurController {
+public class StagiaireController {
 
 	@Autowired
-	RepositoryFormateur formateurRepository;
+	RepositoryStagiaire stagiaireRepository;
 
 	@GetMapping(path = { "", "/" })
 	@JsonView(JsonViews.Common.class)
-	public ResponseEntity<List<Formateur>> findAll() {
-		return new ResponseEntity<>(formateurRepository.findAllFormateur(), HttpStatus.OK);
+	public ResponseEntity<List<Stagiaire>> findAll() {
+		return new ResponseEntity<>(stagiaireRepository.findAllStagiaire(), HttpStatus.OK);
 	}
 
 	@PostMapping(path = { "", "/" })
-	public ResponseEntity<Void> createFormateur(@Valid @RequestBody Formateur formateur, BindingResult br,
+	public ResponseEntity<Void> createStagiaire(@Valid @RequestBody Stagiaire stagiaire, BindingResult br,
 			UriComponentsBuilder uCB) {
 		ResponseEntity<Void> response = null;
 		if (br.hasErrors()) {
 			response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		} else {
-			formateurRepository.save(formateur);
+			stagiaireRepository.save(stagiaire);
 			HttpHeaders header = new HttpHeaders();
-			header.setLocation(uCB.path("/rest/formateur/{id}").buildAndExpand(formateur.getId()).toUri());
+			header.setLocation(uCB.path("/rest/stagiaire/{id}").buildAndExpand(stagiaire.getId()).toUri());
 			response = new ResponseEntity<>(header, HttpStatus.CREATED);
 		}
 		return response;
@@ -59,11 +59,11 @@ public class FormateurController {
 
 	@GetMapping(value = "/{id}")
 	@JsonView(JsonViews.Common.class)
-	public ResponseEntity<Formateur> findById(@PathVariable(name = "id") Long id) {
-		Optional<RessourceHumaine> opt = formateurRepository.findById(id);
-		ResponseEntity<Formateur> response = null;
+	public ResponseEntity<Stagiaire> findById(@PathVariable(name = "id") Long id) {
+		Optional<RessourceHumaine> opt = stagiaireRepository.findById(id);
+		ResponseEntity<Stagiaire> response = null;
 		if (opt.isPresent()) {
-			response = new ResponseEntity<Formateur>((Formateur) opt.get(), HttpStatus.OK);
+			response = new ResponseEntity<Stagiaire>((Stagiaire)opt.get(), HttpStatus.OK);
 		} else {
 			response = new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
@@ -72,20 +72,20 @@ public class FormateurController {
 
 	@JsonView(JsonViews.Common.class)
 	@PutMapping(path = { "", "/" })
-	public ResponseEntity<Formateur> update(@Valid @RequestBody Formateur formateur, BindingResult br) {
-		ResponseEntity<Formateur> response = null;
+	public ResponseEntity<Stagiaire> update(@Valid @RequestBody Stagiaire stagiaire, BindingResult br) {
+		ResponseEntity<Stagiaire> response = null;
 
-		if (br.hasErrors() || formateur.getId() == null) {
+		if (br.hasErrors() || stagiaire.getId() == null) {
 			response = new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
 		} else {
-			Optional<RessourceHumaine> opt = formateurRepository.findById(formateur.getId());
+			Optional<RessourceHumaine> opt = stagiaireRepository.findById(stagiaire.getId());
 			if (opt.isPresent()) {
-				Formateur formateurEnBase = (Formateur) opt.get();
-				formateurEnBase.setName(formateur.getName());
-				formateurEnBase.setSurname(formateur.getSurname());
-				formateurEnBase.setAdress(formateur.getAdress());
-				formateurRepository.save(formateurEnBase);
-				response = new ResponseEntity<Formateur>(formateurEnBase, HttpStatus.OK);
+				Stagiaire stagiaireEnBase = (Stagiaire)opt.get();
+				stagiaireEnBase.setName(stagiaire.getName());
+				stagiaireEnBase.setSurname(stagiaire.getSurname());
+				stagiaireEnBase.setAdress(stagiaire.getAdress());
+				stagiaireRepository.save(stagiaireEnBase);
+				response = new ResponseEntity<Stagiaire>(stagiaireEnBase, HttpStatus.OK);
 			} else {
 				response = new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
 			}
@@ -95,10 +95,10 @@ public class FormateurController {
 
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable(name = "id") Long id) {
-		Optional<RessourceHumaine> opt = formateurRepository.findById(id);
+		Optional<RessourceHumaine> opt = stagiaireRepository.findById(id);
 		ResponseEntity<Void> response = null;
 		if (opt.isPresent()) {
-			formateurRepository.deleteById(id);
+			stagiaireRepository.deleteById(id);
 			response = new ResponseEntity<>(HttpStatus.OK);
 		} else {
 			response = new ResponseEntity<>(HttpStatus.NO_CONTENT);

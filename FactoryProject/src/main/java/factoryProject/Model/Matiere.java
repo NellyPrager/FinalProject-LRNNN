@@ -11,8 +11,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
+
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table(name = "subjects")
@@ -20,24 +23,30 @@ public class Matiere {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@JsonView(JsonViews.Common.class)
 	private long id;
 
 	@Version
 	private int version;
 
 	@Column(name = "title")
+	@JsonView(JsonViews.Common.class)
 	private String title;
 
 	@Column(name = "duration")
+	@JsonView(JsonViews.Common.class)
 	private int duration;
 
 	@Column(name = "objectives")
+	@JsonView(JsonViews.Common.class)
 	private ArrayList<String> objectives;
 
 	@Column(name = "prerequisites")
+	@JsonView(JsonViews.Common.class)
 	private ArrayList<String> prerequisites;
 
 	@Column(name = "content")
+	@JsonView(JsonViews.Common.class)
 	private String content;
 
 	@Column(name = "level")
@@ -46,6 +55,9 @@ public class Matiere {
 
 	@OneToMany(mappedBy = "matiere")
 	private List<MatiereFormateur> formateurs = new ArrayList<>();
+
+	@OneToOne(mappedBy = "subject")
+	private Module module;
 
 	public Matiere() {
 		super();
@@ -88,6 +100,22 @@ public class Matiere {
 
 	public ArrayList<String> getObjectives() {
 		return objectives;
+	}
+
+	public List<MatiereFormateur> getFormateurs() {
+		return formateurs;
+	}
+
+	public void setFormateurs(List<MatiereFormateur> formateurs) {
+		this.formateurs = formateurs;
+	}
+
+	public Module getModule() {
+		return module;
+	}
+
+	public void setModule(Module module) {
+		this.module = module;
 	}
 
 	public void setObjectives(ArrayList<String> objectives) {

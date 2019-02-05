@@ -7,8 +7,7 @@ import javax.persistence.Table;
 
 @Entity
 @DiscriminatorValue("administrateur")
-@Table(name="admins")
-public class Administrateur {
+public class Administrateur extends RessourceHumaine  {
 	@Column(name="password")
 	private String motDePasse;
 }

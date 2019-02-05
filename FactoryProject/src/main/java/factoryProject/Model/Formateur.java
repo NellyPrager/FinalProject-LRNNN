@@ -11,7 +11,6 @@ import javax.persistence.Table;
 
 @Entity
 @DiscriminatorValue("formateur")
-@Table(name="trainers")
 public class Formateur extends RessourceHumaine{
 	@Column(name="password")
 	private String motDePasse;

@@ -43,7 +43,7 @@ public class StagiaireController {
 		return new ResponseEntity<>(stagiaireRepository.findAllStagiaire(), HttpStatus.OK);
 	}
 
-	@PostMapping(path = { "", "/" })
+	@PostMapping(path = {"/create" })
 	public ResponseEntity<Void> createStagiaire(@Valid @RequestBody Stagiaire stagiaire, BindingResult br,
 			UriComponentsBuilder uCB) {
 		ResponseEntity<Void> response = null;

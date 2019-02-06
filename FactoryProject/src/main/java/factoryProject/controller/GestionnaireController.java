@@ -41,7 +41,7 @@ public class GestionnaireController {
 			return new ResponseEntity<>(gestionnaireRepository.findAllGestionnaire(), HttpStatus.OK);
 		}
 
-		@PostMapping(path = { "", "/" })
+		@PostMapping(path = {"/create" })
 		public ResponseEntity<Void> createGestionnaire(@Valid @RequestBody Gestionnaire gestionnaire, BindingResult br,
 				UriComponentsBuilder uCB) {
 			ResponseEntity<Void> response = null;

@@ -43,6 +43,7 @@ public class AdministrateurController {
 		}
 
 		@PostMapping(path = { "", "/" })
+		@JsonView(JsonViews.Common.class)
 		public ResponseEntity<Void> createAdministrateur(@Valid @RequestBody Administrateur administrateur, BindingResult br,
 				UriComponentsBuilder uCB) {
 			ResponseEntity<Void> response = null;
@@ -70,8 +71,9 @@ public class AdministrateurController {
 			return response;
 		}
 
+		
+		@PutMapping(path = {"/update"})
 		@JsonView(JsonViews.Common.class)
-		@PutMapping(path = { "", "/" })
 		public ResponseEntity<Administrateur> update(@Valid @RequestBody Administrateur administrateur, BindingResult br) {
 			ResponseEntity<Administrateur> response = null;
 

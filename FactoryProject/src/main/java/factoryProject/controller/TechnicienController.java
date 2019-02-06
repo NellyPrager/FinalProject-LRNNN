@@ -42,7 +42,7 @@ public class TechnicienController {
 				return new ResponseEntity<>(technicienRepository.findAllTechnicien(), HttpStatus.OK);
 			}
 
-			@PostMapping(path = { "", "/" })
+			@PostMapping(path = {"/create" })
 			public ResponseEntity<Void> createTechnicien(@Valid @RequestBody Technicien technicien, BindingResult br,
 					UriComponentsBuilder uCB) {
 				ResponseEntity<Void> response = null;

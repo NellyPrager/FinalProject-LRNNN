@@ -7,11 +7,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import factoryProject.Model.Administrateur;
+import factoryProject.Model.RessourceHumaine;
 
 
 @Repository
-public interface RepositoryAdministrateur extends JpaRepository<Administrateur, Long> {
+public interface RepositoryAdministrateur extends JpaRepository<RessourceHumaine, Long> {
 
-	@Query("select distinct administrateur from human_resources")
-	List<Administrateur>findAllAdministrateur();
+	@Query("select h from RessourceHumaine h where h.class='administrateur'")
+	List<Administrateur> findAllAdministrateur();
 }

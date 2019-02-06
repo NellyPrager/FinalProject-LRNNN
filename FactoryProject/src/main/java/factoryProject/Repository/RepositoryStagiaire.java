@@ -15,7 +15,7 @@ import factoryProject.Model.Technicien;
 @Repository
 public interface RepositoryStagiaire extends JpaRepository<RessourceHumaine, Long>{
 
-	@Query("select distinct stagiaire from human_resources")
+	@Query("select h from RessourceHumaine h where h.class='stagiaire'")
 	List<Stagiaire>findAllStagiaire();
 
 	

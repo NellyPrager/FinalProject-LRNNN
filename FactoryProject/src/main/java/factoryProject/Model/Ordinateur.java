@@ -18,62 +18,44 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @DiscriminatorValue("computer")
-public class Ordinateur extends Materiel{
-	
+public class Ordinateur extends Materiel {
+
 	@JsonView(JsonViews.Common.class)
 	@Column
 	private String processor;
-	
-	@Version
-	private int version;
-	@Column(name="ram")
+	@Column(name = "ram")
 	@JsonView(JsonViews.Common.class)
 	private int ram;
-	@Column(name="hard_disk")
+	@Column(name = "hard_disk")
 	@JsonView(JsonViews.Common.class)
 	private int hardDisk;
-	
-	@Column(name="year_of_purchase")
+
+	@Column(name = "year_of_purchase")
 	@Temporal(TemporalType.DATE)
 	private Date year;
-	
-	@Column
-	@OneToOne(mappedBy="computer")
+
+	@OneToOne(mappedBy = "computer")
 	private Stagiaire intern;
 
-	
-	
 	public Ordinateur() {
 		super();
 	}
 
-
-	public Ordinateur(int ram, int hardDisk, Date year, Stagiaire intern) {
+	public Ordinateur(String processor, int ram, int hardDisk, Date year, Stagiaire intern) {
 		super();
+		this.processor = processor;
 		this.ram = ram;
 		this.hardDisk = hardDisk;
 		this.year = year;
 		this.intern = intern;
 	}
 
-
 	public String getProcessor() {
 		return processor;
 	}
 
-
 	public void setProcessor(String processor) {
 		this.processor = processor;
-	}
-
-
-	public int getVersion() {
-		return version;
-	}
-
-
-	public void setVersion(int version) {
-		this.version = version;
 	}
 
 
@@ -81,47 +63,32 @@ public class Ordinateur extends Materiel{
 		return ram;
 	}
 
-
 	public void setRam(int ram) {
 		this.ram = ram;
 	}
-
 
 	public int getHardDisk() {
 		return hardDisk;
 	}
 
-
 	public void setHardDisk(int hardDisk) {
 		this.hardDisk = hardDisk;
 	}
-
 
 	public Date getYear() {
 		return year;
 	}
 
-
 	public void setYear(Date year) {
 		this.year = year;
 	}
-
 
 	public Stagiaire getIntern() {
 		return intern;
 	}
 
-
 	public void setIntern(Stagiaire intern) {
 		this.intern = intern;
 	}
-
-
-	
-	
-	
-	
-	
-	
 
 }

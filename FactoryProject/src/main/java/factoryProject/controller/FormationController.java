@@ -44,7 +44,7 @@ public class FormationController {
 		return new ResponseEntity<>(repoFormation.findAll(), HttpStatus.OK);
 	}
 	
-	@GetMapping(path = { "", "/interns" })
+	@GetMapping(path = { "interns", "/interns" })
 	@JsonView(JsonViews.FormationWithInterns.class)
 	public ResponseEntity<List<Formation>> findAllFormationWithInterns() {
 		return new ResponseEntity<>(repoFormation.findAllFormationWithInterns(), HttpStatus.OK);

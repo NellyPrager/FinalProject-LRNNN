@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -29,7 +30,7 @@ import factoryProject.Repository.RepositoryAdministrateur;
 
 
 @CrossOrigin(origins = "http://localhost:4200")
-// @RequestMapping("/rest/personne/stagiaire")
+@RequestMapping("/administrateur")
 @RestController
 public class AdministrateurController {
 		@Autowired
@@ -59,7 +60,7 @@ public class AdministrateurController {
 		@GetMapping(value = "/{id}")
 		@JsonView(JsonViews.Common.class)
 		public ResponseEntity<Administrateur> findById(@PathVariable(name = "id") Long id) {
-			Optional<Administrateur> opt = administrateurRepository.findById(id);
+			Optional<RessourceHumaine> opt = administrateurRepository.findById(id);
 			ResponseEntity<Administrateur> response = null;
 			if (opt.isPresent()) {
 				response = new ResponseEntity<Administrateur>((Administrateur) opt.get(), HttpStatus.OK);
@@ -77,7 +78,7 @@ public class AdministrateurController {
 			if (br.hasErrors() || 	administrateur.getId() == null) {
 				response = new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
 			} else {
-				Optional<Administrateur> opt = administrateurRepository.findById(administrateur.getId());
+				Optional<RessourceHumaine> opt = administrateurRepository.findById(administrateur.getId());
 				if (opt.isPresent()) {
 					Administrateur administrateurEnBase = (Administrateur) opt.get();
 					administrateurEnBase.setName(administrateur.getName());
@@ -94,7 +95,7 @@ public class AdministrateurController {
 
 		@DeleteMapping(value = "/{id}")
 		public ResponseEntity<Void> delete(@PathVariable(name = "id") Long id) {
-			Optional<Administrateur> opt = administrateurRepository.findById(id);
+			Optional<RessourceHumaine> opt = administrateurRepository.findById(id);
 			ResponseEntity<Void> response = null;
 			if (opt.isPresent()) {
 				administrateurRepository.deleteById(id);

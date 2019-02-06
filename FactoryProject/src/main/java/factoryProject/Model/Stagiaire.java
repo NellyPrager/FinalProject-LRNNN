@@ -10,34 +10,53 @@ import javax.persistence.Table;
 
 @Entity
 @DiscriminatorValue("stagiaire")
-public class Stagiaire extends RessourceHumaine{
+public class Stagiaire extends RessourceHumaine {
 
-@Column(name="password")
-private String motDePasse;
+	@ManyToOne
+	@JoinColumn(name = "trainer_id")
+	private Formateur trainer;
 
-@Column(name="username")
-private String username;
+	@OneToOne
+	@JoinColumn(name = "computer_code")
+	private Ordinateur computer;
+	
+	@ManyToOne
+	@JoinColumn(name="formation_id")
+	private Formation formation;
 
-@ManyToOne
-@JoinColumn(name="trainer")
-private Formateur trainer;
+	public Stagiaire() {
+	}
 
-@OneToOne
-@JoinColumn(name="computer")
-private Ordinateur ordinateur;
+	public Stagiaire(Formateur trainer, Ordinateur computer, Formation formation) {
+		super();
+		this.trainer = trainer;
+		this.computer = computer;
+		this.formation = formation;
+	}
 
-public String getMotDePasse() {
-	return motDePasse;
-}
+	public Formateur getTrainer() {
+		return trainer;
+	}
 
-public void setMotDePasse(String motDePasse) {
-	this.motDePasse = motDePasse;
-}
+	public void setTrainer(Formateur trainer) {
+		this.trainer = trainer;
+	}
 
-public Stagiaire(String motDePasse) {
-	super();
-	this.motDePasse = motDePasse;
-}
+	public Ordinateur getComputer() {
+		return computer;
+	}
 
-public Stagiaire() {}
+	public void setComputer(Ordinateur computer) {
+		this.computer = computer;
+	}
+
+	public Formation getFormation() {
+		return formation;
+	}
+
+	public void setFormation(Formation formation) {
+		this.formation = formation;
+	}
+
+	
 }

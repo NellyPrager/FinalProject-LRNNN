@@ -12,7 +12,7 @@ import factoryProject.Model.Technicien;
 @Repository
 public interface RepositoryTechnicien extends JpaRepository<RessourceHumaine, Long>{
 
-	@Query("select distinct technicien from human_resources")
+	@Query("select h from RessourceHumaine h where h.class='technicien'")
 	List<Technicien>findAllTechnicien();
 
 	

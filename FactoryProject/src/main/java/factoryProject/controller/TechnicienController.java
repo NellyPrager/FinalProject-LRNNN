@@ -17,20 +17,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import factoryProject.Model.Gestionnaire;
 import factoryProject.Model.JsonViews;
 import factoryProject.Model.RessourceHumaine;
 import factoryProject.Model.Technicien;
-import factoryProject.Repository.RepositoryGestionnaire;
 import factoryProject.Repository.RepositoryTechnicien;
 
 @CrossOrigin(origins = "http://localhost:4200")
-// @RequestMapping("/rest/personne/stagiaire")
+@RequestMapping("/technicien")
 @RestController
 public class TechnicienController {
 

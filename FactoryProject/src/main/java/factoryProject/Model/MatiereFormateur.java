@@ -49,4 +49,12 @@ public class MatiereFormateur {
 		this.matiere = matiere;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 }

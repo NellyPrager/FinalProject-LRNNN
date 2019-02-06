@@ -11,33 +11,26 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @DiscriminatorValue("room")
-public class Salle extends Materiel{
-	@Version
-	private int version;
+public class Salle extends Materiel {
 	@Column
 	@JsonView(JsonViews.Common.class)
 	private int capacity;
 	@OneToOne
-	@JoinColumn(name = "videoProjector_code")
+	@JoinColumn(name = "videoprojector_code")
 	@JsonView(JsonViews.Common.class)
 	private VideoProjecteur videoProjector;
-	
+	@OneToOne(mappedBy = "room")
+	@JsonView(JsonViews.Common.class)
+	private Module module;
+
 	public Salle() {
 		super();
 	}
 
-	public Salle(int version, int capacity) {
+	public Salle(int capacity, VideoProjecteur videoProjector) {
 		super();
-		this.version = version;
 		this.capacity = capacity;
-	}
-
-	public int getVersion() {
-		return version;
-	}
-
-	public void setVersion(int version) {
-		this.version = version;
+		this.videoProjector = videoProjector;
 	}
 
 	public int getCapacity() {
@@ -47,7 +40,13 @@ public class Salle extends Materiel{
 	public void setCapacity(int capacity) {
 		this.capacity = capacity;
 	}
-	
-	
+
+	public VideoProjecteur getVideoProjector() {
+		return videoProjector;
+	}
+
+	public void setVideoProjector(VideoProjecteur videoProjector) {
+		this.videoProjector = videoProjector;
+	}
 
 }

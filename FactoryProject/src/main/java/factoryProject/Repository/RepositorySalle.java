@@ -12,7 +12,7 @@ import factoryProject.Model.Salle;
 @Repository
 
 public interface RepositorySalle extends JpaRepository<Materiel, String> {
-	@Query("select distinct room from material")
+	@Query("select m from Materiel m where m.class='room'")
 	List<Salle> findAllRoom() ;
 //	List<VideoProjecteur> findAllVideoProjecteur() ;
 

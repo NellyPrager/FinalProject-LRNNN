@@ -17,8 +17,5 @@ public class JsonViews {
 		
 	}
 	
-	public static class FormationWithInterns extends Common {
-
-	}
 }
 

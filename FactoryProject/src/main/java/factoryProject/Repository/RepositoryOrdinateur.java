@@ -9,9 +9,10 @@ import factoryProject.Model.Materiel;
 import factoryProject.Model.Ordinateur;
 
 public interface RepositoryOrdinateur extends JpaRepository<Materiel, String>{
-	@Query("select distinct computer from material")
-	List<Ordinateur> findAllComputerWithInterns();
+	
+	@Query("select m from Materiel m where m.class='computer'")
 	List<Ordinateur> findAllComputer() ;
 	
-
+	@Query("select m from Materiel m where m.class='computer'")
+	List<Ordinateur> findAllComputerWithInterns();
 }

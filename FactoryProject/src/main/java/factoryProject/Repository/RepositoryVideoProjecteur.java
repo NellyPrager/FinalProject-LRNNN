@@ -9,8 +9,8 @@ import factoryProject.Model.Materiel;
 
 import factoryProject.Model.VideoProjecteur;
 
-public interface RepositoryVideoProjecteur extends JpaRepository<Materiel, String>{
-	@Query("select distinct video_projector from material")
-	List<VideoProjecteur> findAllVideoProjector() ;
+public interface RepositoryVideoProjecteur extends JpaRepository<Materiel, String> {
+	@Query("select m from Materiel m where m.class='video_projector'")
+	List<VideoProjecteur> findAllVideoProjector();
 
 }

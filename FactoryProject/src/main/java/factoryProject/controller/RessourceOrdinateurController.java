@@ -36,7 +36,7 @@ import factoryProject.Repository.RepositoryOrdinateur;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/material")
+@RequestMapping("/ordinateur")
 public class RessourceOrdinateurController {
 	
 	@Autowired

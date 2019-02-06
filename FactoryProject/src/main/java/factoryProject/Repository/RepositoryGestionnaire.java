@@ -12,7 +12,7 @@ import factoryProject.Model.RessourceHumaine;
 @Repository
 public interface RepositoryGestionnaire extends JpaRepository<RessourceHumaine, Long>{
 
-	@Query("select distinct gestionnaire from human_resources")
+	@Query("select h from RessourceHumaine h where h.class='gestionnaire'")
 	List<Gestionnaire>findAllGestionnaire();
 
 	

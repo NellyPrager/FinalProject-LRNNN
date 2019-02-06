@@ -37,10 +37,11 @@ public class Formation {
 		super();
 	}
 
-	public Formation(List<Module> modules, List<Stagiaire> interns) {
+	public Formation(List<Module> modules, List<Stagiaire> interns, TypeFormation formationType) {
 		super();
 		this.modules = modules;
 		this.interns = interns;
+		this.formationType = formationType;
 	}
 
 	public Long getId() {
@@ -73,6 +74,14 @@ public class Formation {
 
 	public void setInterns(List<Stagiaire> interns) {
 		this.interns = interns;
+	}
+
+	public TypeFormation getFormationType() {
+		return formationType;
+	}
+
+	public void setFormationType(TypeFormation formationType) {
+		this.formationType = formationType;
 	}
 
 }

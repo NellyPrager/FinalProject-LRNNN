@@ -64,7 +64,7 @@ public class Matiere {
 	}
 
 	public Matiere(String title, int duration, ArrayList<String> objectives, ArrayList<String> prerequisites,
-			String content, Niveau level) {
+			String content, Niveau level, List<MatiereFormateur> formateurs, Module module) {
 		super();
 		this.title = title;
 		this.duration = duration;
@@ -72,6 +72,16 @@ public class Matiere {
 		this.prerequisites = prerequisites;
 		this.content = content;
 		this.level = level;
+		this.formateurs = formateurs;
+		this.module = module;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public int getVersion() {

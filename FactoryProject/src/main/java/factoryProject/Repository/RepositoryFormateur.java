@@ -8,12 +8,10 @@ import org.springframework.stereotype.Repository;
 import factoryProject.Model.Formateur;
 import factoryProject.Model.RessourceHumaine;
 
-	@Repository
-	public interface RepositoryFormateur extends JpaRepository<RessourceHumaine, Long>{
+@Repository
+public interface RepositoryFormateur extends JpaRepository<RessourceHumaine, Long> {
 
-		@Query("select distinct formateur from human_resources")
-		List<Formateur>findAllFormateur();
+	@Query("select h from RessourceHumaine h where h.class='formateur'")
+	List<Formateur> findAllFormateur();
 
-		
-	}
-
+}

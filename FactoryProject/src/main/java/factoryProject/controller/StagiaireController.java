@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -29,7 +30,7 @@ import factoryProject.Model.Stagiaire;
 import factoryProject.Repository.RepositoryStagiaire;
 
 @CrossOrigin(origins = "http://localhost:4200")
-//@RequestMapping("/rest/personne/stagiaire")
+@RequestMapping("/stagiaire")
 @RestController
 public class StagiaireController {
 

@@ -33,7 +33,7 @@ public class Creneau {
 	private int sizeCreneau;
 	@Column(name = "availability")
 	@JsonView(JsonViews.Common.class)
-	private boolean dispo;
+	private boolean availability;
 	@ManyToOne
 	@JoinColumn(name = "trainer_id")
 	@JsonView(JsonViews.Common.class)
@@ -47,7 +47,7 @@ public class Creneau {
 		super();
 		this.date = date;
 		this.sizeCreneau = sizeCreneau;
-		this.dispo = dispo;
+		this.availability = dispo;
 		this.trainer = trainer;
 	}
 
@@ -83,12 +83,12 @@ public class Creneau {
 		this.sizeCreneau = sizeCreneau;
 	}
 
-	public boolean isDispo() {
-		return dispo;
+	public boolean isAvailability() {
+		return availability;
 	}
 
-	public void setDispo(boolean dispo) {
-		this.dispo = dispo;
+	public void setAvailability(boolean availability) {
+		this.availability = availability;
 	}
 
 	public Formateur getTrainer() {

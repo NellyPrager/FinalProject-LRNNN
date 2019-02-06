@@ -25,7 +25,7 @@ public class Module {
 	private Long id;
 	@Version
 	private int version;
-	@Column(name = "date_debut")
+	@Column(name = "start_date")
 	@Temporal(TemporalType.DATE)
 	@JsonView(JsonViews.Common.class)
 	private Date dateDebut;

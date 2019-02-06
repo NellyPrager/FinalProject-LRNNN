@@ -33,11 +33,12 @@ public class Ordinateur extends Materiel {
 
 	@Column(name = "year_of_purchase")
 	@Temporal(TemporalType.DATE)
+	@JsonView(JsonViews.Common.class)
 	private Date year;
 
 	@OneToOne
 	@JoinColumn(name = "intern_id")
-	@JsonView(JsonViews.Common.class)
+	@JsonView(JsonViews.ComputerWithIntern.class)
 	private Stagiaire intern;
 
 	public Ordinateur() {

@@ -28,6 +28,7 @@ import factoryProject.Model.JsonViews;
 import factoryProject.Model.Materiel;
 import factoryProject.Model.Ordinateur;
 import factoryProject.Repository.RepositoryOrdinateur;
+import factoryProject.Repository.RepositoryStagiaire;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -37,17 +38,25 @@ public class RessourceOrdinateurController {
 	@Autowired
 	RepositoryOrdinateur repositoryComputer;
 
+	@Autowired
+	RepositoryStagiaire repositoryStagiaire;
+
 	@GetMapping(path = { "", "/" })
 	@JsonView(JsonViews.Common.class)
 	public ResponseEntity<List<Ordinateur>> findAll() {
-//		List<Ordinateur> ordinateurs = new ArrayList<>();
-//		repositoryComputer.findAllComputer().forEach(ordinateurs::add);
+		// List<Ordinateur> ordinateurs = new ArrayList<>();
+		// repositoryComputer.findAllComputer().forEach(ordinateurs::add);
 		return new ResponseEntity<>(repositoryComputer.findAllComputer(), HttpStatus.OK);
 	}
 
 	@GetMapping(path = { "/intern" })
 	@JsonView(JsonViews.ComputerWithIntern.class)
 	public ResponseEntity<List<Ordinateur>> findAllWithInterns() {
+		// List<Ordinateur> ordinateurs = new ArrayList<>();
+		// repositoryComputer.findAllComputer().forEach(ordinateurs::add);
+		// for(Ordinateur e:ordinateurs) {
+		// e.getIntern().getName();
+		// }
 		return new ResponseEntity<>(repositoryComputer.findAllComputerWithInterns(), HttpStatus.OK);
 	}
 

@@ -38,7 +38,7 @@ public class RessourceSalleController {
 	@Autowired
 	RepositorySalle repositoryRoom;
 	
-	@GetMapping("/salle")
+	@GetMapping(path = { "", "/" })
 	@JsonView(JsonViews.Common.class)
 	public ResponseEntity<List<Salle>> findAll() {
 		return new ResponseEntity<>(repositoryRoom.findAllRoom(), HttpStatus.OK);
@@ -46,6 +46,7 @@ public class RessourceSalleController {
 
 
 	@PostMapping(path = { "", "/" })
+	@JsonView(JsonViews.Common.class)
 	public ResponseEntity<Void> createComputer(@Valid @RequestBody Salle room, BindingResult br,
 			UriComponentsBuilder uCB) {
 		ResponseEntity<Void> response = null;

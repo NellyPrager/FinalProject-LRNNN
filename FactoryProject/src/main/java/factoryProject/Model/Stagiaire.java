@@ -8,6 +8,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @DiscriminatorValue("stagiaire")
 public class Stagiaire extends RessourceHumaine {
@@ -16,8 +18,7 @@ public class Stagiaire extends RessourceHumaine {
 	@JoinColumn(name = "trainer_id")
 	private Formateur trainer;
 
-	@OneToOne
-	@JoinColumn(name = "computer_code")
+	@OneToOne(mappedBy = "intern")
 	private Ordinateur computer;
 	
 	@ManyToOne

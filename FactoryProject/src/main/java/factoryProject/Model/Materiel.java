@@ -11,18 +11,23 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "material_resources")
 @DiscriminatorColumn(name = "material")
 public abstract class Materiel {
 	@Id
+	@JsonView(JsonViews.Common.class)
 	private String code;
 	@Version
 	private int version;
 	@Column(name = "price")
+	@JsonView(JsonViews.Common.class)
 	private int price;
 	@Column(name = "availability")
+	@JsonView(JsonViews.Common.class)
 	private boolean availability;
 
 	public Materiel() {

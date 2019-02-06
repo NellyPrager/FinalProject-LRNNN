@@ -9,13 +9,17 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @DiscriminatorValue("formateur")
 public class Formateur extends RessourceHumaine {
 	@Column(name = "password")
+	@JsonView(JsonViews.Common.class)
 	private String motDePasse;
 
 	@Column(name = "username")
+	@JsonView(JsonViews.Common.class)
 	private String username;
 
 	@OneToMany(mappedBy = "formateur")

@@ -38,7 +38,7 @@ public class RessourceSalleController {
 	@Autowired
 	RepositorySalle repositoryRoom;
 	
-	@GetMapping(path = { "", "/" })
+	@GetMapping("/salle")
 	@JsonView(JsonViews.Common.class)
 	public ResponseEntity<List<Salle>> findAll() {
 		return new ResponseEntity<>(repositoryRoom.findAllRoom(), HttpStatus.OK);

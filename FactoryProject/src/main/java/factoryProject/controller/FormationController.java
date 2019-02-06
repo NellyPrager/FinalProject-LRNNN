@@ -29,7 +29,7 @@ import factoryProject.Model.Formation;
 import factoryProject.Model.JsonViews;
 import factoryProject.Repository.RepositoryFormation;
 
-@CrossOrigin(origins = "{*}")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/formation")
 //module de gestion des planning les mecs, siiiii sii

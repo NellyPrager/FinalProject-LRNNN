@@ -1,6 +1,5 @@
 package factoryProject.controller;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -25,26 +24,24 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-
 import factoryProject.Model.JsonViews;
 import factoryProject.Model.Materiel;
 import factoryProject.Model.Ordinateur;
 import factoryProject.Repository.RepositoryOrdinateur;
 
-
-
-
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/ordinateur")
 public class RessourceOrdinateurController {
-	
+
 	@Autowired
 	RepositoryOrdinateur repositoryComputer;
-	
+
 	@GetMapping(path = { "", "/" })
 	@JsonView(JsonViews.Common.class)
 	public ResponseEntity<List<Ordinateur>> findAll() {
+//		List<Ordinateur> ordinateurs = new ArrayList<>();
+//		repositoryComputer.findAllComputer().forEach(ordinateurs::add);
 		return new ResponseEntity<>(repositoryComputer.findAllComputer(), HttpStatus.OK);
 	}
 
@@ -55,6 +52,7 @@ public class RessourceOrdinateurController {
 	}
 
 	@PostMapping(path = { "", "/" })
+	@JsonView(JsonViews.Common.class)
 	public ResponseEntity<Void> createComputer(@Valid @RequestBody Ordinateur computer, BindingResult br,
 			UriComponentsBuilder uCB) {
 		ResponseEntity<Void> response = null;
@@ -63,19 +61,19 @@ public class RessourceOrdinateurController {
 		} else {
 			repositoryComputer.save(computer);
 			HttpHeaders header = new HttpHeaders();
-			header.setLocation(uCB.path("/rest/computer/{code}").buildAndExpand(computer.getCode()).toUri());
+			header.setLocation(uCB.path("/ordinateur/{code}").buildAndExpand(computer.getCode()).toUri());
 			response = new ResponseEntity<>(header, HttpStatus.CREATED);
 		}
 		return response;
 	}
 
-	@GetMapping(value = "/{id}")
+	@GetMapping(value = "/{code}")
 	@JsonView(JsonViews.Common.class)
 	public ResponseEntity<Ordinateur> findById(@PathVariable(name = "code") String code) {
 		Optional<Materiel> opt = repositoryComputer.findById(code);
 		ResponseEntity<Ordinateur> response = null;
 		if (opt.isPresent()) {
-			response = new ResponseEntity<Ordinateur>((Ordinateur)opt.get(), HttpStatus.OK);
+			response = new ResponseEntity<Ordinateur>((Ordinateur) opt.get(), HttpStatus.OK);
 		} else {
 			response = new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
@@ -92,7 +90,7 @@ public class RessourceOrdinateurController {
 		} else {
 			Optional<Materiel> opt = repositoryComputer.findById(computer.getCode());
 			if (opt.isPresent()) {
-				Ordinateur ordinateurEnBase = (Ordinateur)opt.get();
+				Ordinateur ordinateurEnBase = (Ordinateur) opt.get();
 				ordinateurEnBase.setCode(computer.getCode());
 				ordinateurEnBase.setHardDisk(computer.getHardDisk());
 				ordinateurEnBase.setPrice(computer.getPrice());

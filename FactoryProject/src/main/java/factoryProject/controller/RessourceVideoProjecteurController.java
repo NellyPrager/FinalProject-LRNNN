@@ -30,7 +30,7 @@ import factoryProject.Repository.RepositoryVideoProjecteur;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/projo")
+@RequestMapping("/videoprojecteur")
 public class RessourceVideoProjecteurController {
 
 	@Autowired

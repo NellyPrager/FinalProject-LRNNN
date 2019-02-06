@@ -43,7 +43,6 @@ public class Module {
 	private Salle room;
 	@ManyToOne
 	@JoinColumn(name = "formation_id")
-	@JsonView(JsonViews.Common.class)
 	private Formation formation;
 
 	public Module() {

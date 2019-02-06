@@ -20,7 +20,6 @@ public class Salle extends Materiel {
 	@JsonView(JsonViews.Common.class)
 	private VideoProjecteur videoProjector;
 	@OneToOne(mappedBy = "room")
-	@JsonView(JsonViews.Common.class)
 	private Module module;
 
 	public Salle() {

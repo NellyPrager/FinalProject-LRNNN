@@ -51,6 +51,7 @@ public class Matiere {
 
 	@Column(name = "level")
 	@Enumerated(EnumType.STRING)
+	@JsonView(JsonViews.Common.class)
 	private Niveau level;
 
 	@OneToMany(mappedBy = "matiere")

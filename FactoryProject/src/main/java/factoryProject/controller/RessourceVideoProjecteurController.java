@@ -43,7 +43,7 @@ public class RessourceVideoProjecteurController {
 	}
 
 	@PostMapping(path = { "", "/" })
-	public ResponseEntity<Void> createComputer(@Valid @RequestBody Materiel videoProjector, BindingResult br,
+	public ResponseEntity<Void> createProjector(@Valid @RequestBody Materiel videoProjector, BindingResult br,
 			UriComponentsBuilder uCB) {
 		ResponseEntity<Void> response = null;
 		if (br.hasErrors()) {
@@ -52,7 +52,7 @@ public class RessourceVideoProjecteurController {
 			repositoryVideoProjector.save(videoProjector);
 			HttpHeaders header = new HttpHeaders();
 			header.setLocation(
-					uCB.path("/rest/videoProjector/{code}").buildAndExpand(videoProjector.getCode()).toUri());
+					uCB.path("/videoprojecteur/{code}").buildAndExpand(videoProjector.getCode()).toUri());
 			response = new ResponseEntity<>(header, HttpStatus.CREATED);
 		}
 		return response;

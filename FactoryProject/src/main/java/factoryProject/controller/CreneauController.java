@@ -3,11 +3,9 @@ package factoryProject.controller;
 import java.util.List;
 import java.util.Optional;
 
-import javax.persistence.EnumType;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,41 +25,42 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import factoryProject.Model.Competences;
+import factoryProject.Model.Creneau;
 import factoryProject.Model.Formateur;
 import factoryProject.Model.JsonViews;
 import factoryProject.Model.RessourceHumaine;
-import factoryProject.Repository.RepositoryFormateur;
+import factoryProject.Repository.RepositoryCreneau;
 
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/formateur")
+@RequestMapping("/creneau")
 @RestController
-public class FormateurController {
+public class CreneauController {
 
 	@Autowired
-	RepositoryFormateur formateurRepository;
-
+	RepositoryCreneau repoCreneau;
+	
 	@GetMapping(path = { "", "/" })
 	@JsonView(JsonViews.Common.class)
-	public ResponseEntity<List<Formateur>> findAll() {
-		return new ResponseEntity<>(formateurRepository.findAllFormateur(), HttpStatus.OK);
+	public ResponseEntity<List<Creneau>> findAll() {
+		return new ResponseEntity<>(repoCreneau.findAll(), HttpStatus.OK);
 	}
 
 	@GetMapping(path = { "subject", "/subject" })
-	@JsonView(JsonViews.FormateurWithSubject.class)
-	public ResponseEntity<List<Formateur>> findAllFormateurBySubject(@RequestParam(name = "skill") String skill) {
-		return new ResponseEntity<>(formateurRepository.findAllFormateurBySubject(Competences.valueOf(skill)), HttpStatus.OK);
+	@JsonView(JsonViews.CreneauWithFormateur.class)
+	public ResponseEntity<List<Creneau>> findAllCreneauByFormateur(@RequestParam(name = "id") Long id) {
+		return new ResponseEntity<>(repoCreneau.findAllCreneauByFormateur(id), HttpStatus.OK);
 	}
 
 	@PostMapping(path = { "", "/" })
-	public ResponseEntity<Void> createFormateur(@Valid @RequestBody Formateur formateur, BindingResult br,
+	public ResponseEntity<Void> createFormateur(@Valid @RequestBody Creneau creneau, BindingResult br,
 			UriComponentsBuilder uCB) {
 		ResponseEntity<Void> response = null;
 		if (br.hasErrors()) {
 			response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		} else {
-			formateurRepository.save(formateur);
+			repoCreneau.save(creneau);
 			HttpHeaders header = new HttpHeaders();
-			header.setLocation(uCB.path("/formateur/{id}").buildAndExpand(formateur.getId()).toUri());
+			header.setLocation(uCB.path("/creneau/{id}").buildAndExpand(creneau.getId()).toUri());
 			response = new ResponseEntity<>(header, HttpStatus.CREATED);
 		}
 		return response;
@@ -69,11 +68,11 @@ public class FormateurController {
 
 	@GetMapping(value = "/{id}")
 	@JsonView(JsonViews.Common.class)
-	public ResponseEntity<Formateur> findById(@PathVariable(name = "id") Long id) {
-		Optional<RessourceHumaine> opt = formateurRepository.findById(id);
-		ResponseEntity<Formateur> response = null;
+	public ResponseEntity<Creneau> findById(@PathVariable(name = "id") Long id) {
+		Optional<Creneau> opt = repoCreneau.findById(id);
+		ResponseEntity<Creneau> response = null;
 		if (opt.isPresent()) {
-			response = new ResponseEntity<Formateur>((Formateur) opt.get(), HttpStatus.OK);
+			response = new ResponseEntity<Creneau>((Creneau) opt.get(), HttpStatus.OK);
 		} else {
 			response = new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
@@ -82,20 +81,20 @@ public class FormateurController {
 
 	@JsonView(JsonViews.Common.class)
 	@PutMapping(path = { "", "/" })
-	public ResponseEntity<Formateur> update(@Valid @RequestBody Formateur formateur, BindingResult br) {
-		ResponseEntity<Formateur> response = null;
+	public ResponseEntity<Creneau> update(@Valid @RequestBody Creneau creneau, BindingResult br) {
+		ResponseEntity<Creneau> response = null;
 
-		if (br.hasErrors() || formateur.getId() == null) {
+		if (br.hasErrors() || creneau.getId() == null) {
 			response = new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
 		} else {
-			Optional<RessourceHumaine> opt = formateurRepository.findById(formateur.getId());
+			Optional<Creneau> opt = repoCreneau.findById(creneau.getId());
 			if (opt.isPresent()) {
-				Formateur formateurEnBase = (Formateur) opt.get();
-				formateurEnBase.setName(formateur.getName());
-				formateurEnBase.setSurname(formateur.getSurname());
-				formateurEnBase.setAdress(formateur.getAdress());
-				formateurRepository.save(formateurEnBase);
-				response = new ResponseEntity<Formateur>(formateurEnBase, HttpStatus.OK);
+				Creneau creneauEnBase = (Creneau) opt.get();
+				creneauEnBase.setDate(creneau.getDate());
+				creneauEnBase.setAvailability(creneau.getAvailability());
+				creneauEnBase.setTrainer(creneau.getTrainer());
+				repoCreneau.save(creneauEnBase);
+				response = new ResponseEntity<Creneau>(creneauEnBase, HttpStatus.OK);
 			} else {
 				response = new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
 			}
@@ -105,10 +104,10 @@ public class FormateurController {
 
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable(name = "id") Long id) {
-		Optional<RessourceHumaine> opt = formateurRepository.findById(id);
+		Optional<Creneau> opt = repoCreneau.findById(id);
 		ResponseEntity<Void> response = null;
 		if (opt.isPresent()) {
-			formateurRepository.deleteById(id);
+			repoCreneau.deleteById(id);
 			response = new ResponseEntity<>(HttpStatus.OK);
 		} else {
 			response = new ResponseEntity<>(HttpStatus.NO_CONTENT);

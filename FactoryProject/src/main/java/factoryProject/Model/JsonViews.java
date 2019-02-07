@@ -17,4 +17,11 @@ public class JsonViews {
 
 	}
 
+	public static class FormateurWithSubject extends Common {
+
+	}
+
+	public static class CreneauWithFormateur extends Common {
+
+	}
 }

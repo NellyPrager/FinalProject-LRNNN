@@ -12,6 +12,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name = "human_resources")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -19,17 +21,22 @@ import javax.persistence.Version;
 public abstract class RessourceHumaine {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@JsonView(JsonViews.Common.class)
 	private Long id;
 
 	@Column(name = "surname")
+	@JsonView(JsonViews.Common.class)
 	private String surname;
 
 	@Column(name = "name")
+	@JsonView(JsonViews.Common.class)
 	private String name;
 
 	@Embedded
+	@JsonView(JsonViews.Common.class)
 	private Adresse adress;
 	@Embedded
+	@JsonView(JsonViews.Common.class)
 	private Coordonnee contact;
 
 	@Version

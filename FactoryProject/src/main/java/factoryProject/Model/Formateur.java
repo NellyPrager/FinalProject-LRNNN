@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -34,11 +36,15 @@ public class Formateur extends RessourceHumaine {
 	@OneToOne(mappedBy = "trainer")
 	private Module module;
 
+	@Enumerated(EnumType.STRING)
+	@JsonView(JsonViews.FormateurWithSubject.class)
+	private Competences skills;
+
 	public Formateur() {
 	}
 
 	public Formateur(String motDePasse, String username, List<MatiereFormateur> matieres, List<Creneau> creneau,
-			List<Stagiaire> intern, Module module) {
+			List<Stagiaire> intern, Module module, Competences skills) {
 		super();
 		this.motDePasse = motDePasse;
 		this.username = username;
@@ -46,6 +52,15 @@ public class Formateur extends RessourceHumaine {
 		this.creneau = creneau;
 		this.intern = intern;
 		this.module = module;
+		this.skills = skills;
+	}
+
+	public Competences getSkills() {
+		return skills;
+	}
+
+	public void setSkills(Competences skills) {
+		this.skills = skills;
 	}
 
 	public String getMotDePasse() {

@@ -10,6 +10,6 @@ import factoryProject.Model.Formation;
 
 @Repository
 public interface RepositoryFormation extends JpaRepository<Formation, Long> {
-	@Query("select distinct f from Formation f")
+	@Query("select f, h.name, h.surname from Formation f, RessourceHumaine h where h.formation is not null and h.class='stagiaire'")
 	List<Formation> findAllFormationWithInterns();
 }

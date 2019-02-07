@@ -36,7 +36,7 @@ public class Creneau {
 	private boolean availability;
 	@ManyToOne
 	@JoinColumn(name = "trainer_id")
-	@JsonView(JsonViews.Common.class)
+	@JsonView(JsonViews.CreneauWithFormateur.class)
 	private Formateur trainer;
 
 	public Creneau() {
@@ -83,7 +83,7 @@ public class Creneau {
 		this.sizeCreneau = sizeCreneau;
 	}
 
-	public boolean isAvailability() {
+	public boolean getAvailability() {
 		return availability;
 	}
 

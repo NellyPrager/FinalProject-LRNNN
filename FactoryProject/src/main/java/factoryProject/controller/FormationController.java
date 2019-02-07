@@ -50,6 +50,7 @@ public class FormationController {
 	}
 
 	@PostMapping(path = { "", "/" })
+	@JsonView(JsonViews.Common.class)
 	public ResponseEntity<Void> createFormation(@Valid @RequestBody Formation formation, BindingResult br,
 			UriComponentsBuilder uCB) {
 		ResponseEntity<Void> response = null;

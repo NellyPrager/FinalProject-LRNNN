@@ -24,11 +24,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import factoryProject.Model.Competences;
 import factoryProject.Model.Creneau;
-import factoryProject.Model.Formateur;
 import factoryProject.Model.JsonViews;
-import factoryProject.Model.RessourceHumaine;
 import factoryProject.Repository.RepositoryCreneau;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -44,15 +41,16 @@ public class CreneauController {
 	public ResponseEntity<List<Creneau>> findAll() {
 		return new ResponseEntity<>(repoCreneau.findAll(), HttpStatus.OK);
 	}
-
-	@GetMapping(path = { "subject", "/subject" })
+	
+	@GetMapping(path = { "formateur", "/formateur" })
 	@JsonView(JsonViews.CreneauWithFormateur.class)
 	public ResponseEntity<List<Creneau>> findAllCreneauByFormateur(@RequestParam(name = "id") Long id) {
 		return new ResponseEntity<>(repoCreneau.findAllCreneauByFormateur(id), HttpStatus.OK);
 	}
 
 	@PostMapping(path = { "", "/" })
-	public ResponseEntity<Void> createFormateur(@Valid @RequestBody Creneau creneau, BindingResult br,
+	@JsonView(JsonViews.Common.class)
+	public ResponseEntity<Void> createCreneau(@Valid @RequestBody Creneau creneau, BindingResult br,
 			UriComponentsBuilder uCB) {
 		ResponseEntity<Void> response = null;
 		if (br.hasErrors()) {

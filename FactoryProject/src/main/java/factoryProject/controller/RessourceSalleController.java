@@ -47,7 +47,7 @@ public class RessourceSalleController {
 
 	@PostMapping(path = { "", "/" })
 	@JsonView(JsonViews.Common.class)
-	public ResponseEntity<Void> createComputer(@Valid @RequestBody Salle room, BindingResult br,
+	public ResponseEntity<Void> createSalle(@Valid @RequestBody Salle room, BindingResult br,
 			UriComponentsBuilder uCB) {
 		ResponseEntity<Void> response = null;
 		if (br.hasErrors()) {

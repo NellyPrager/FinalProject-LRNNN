@@ -26,10 +26,19 @@ public class Salle extends Materiel {
 		super();
 	}
 
-	public Salle(int capacity, VideoProjecteur videoProjector) {
+	public Salle(int capacity, VideoProjecteur videoProjector, Module module) {
 		super();
 		this.capacity = capacity;
 		this.videoProjector = videoProjector;
+		this.module = module;
+	}
+
+	public Module getModule() {
+		return module;
+	}
+
+	public void setModule(Module module) {
+		this.module = module;
 	}
 
 	public int getCapacity() {

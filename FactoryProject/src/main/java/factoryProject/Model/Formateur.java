@@ -37,7 +37,7 @@ public class Formateur extends RessourceHumaine {
 	private Module module;
 
 	@Column(name = "availability")
-	@JsonView(JsonViews.Common.class)
+	//@JsonView(JsonViews.Common.class)
 	private boolean availability;
 
 	@Enumerated(EnumType.STRING)

@@ -86,6 +86,7 @@ public class AdministrateurController {
 					administrateurEnBase.setName(administrateur.getName());
 					administrateurEnBase.setSurname(administrateur.getSurname());
 					administrateurEnBase.setAdress(administrateur.getAdress());
+					administrateurEnBase.setContact(administrateur.getContact());
 					administrateurRepository.save(administrateurEnBase);
 					response = new ResponseEntity<Administrateur>(administrateurEnBase, HttpStatus.OK);
 				} else {

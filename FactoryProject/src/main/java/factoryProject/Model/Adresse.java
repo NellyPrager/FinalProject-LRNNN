@@ -3,22 +3,29 @@ package factoryProject.Model;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Embeddable
 public class Adresse {
 
 	@Column(name = "number")
+	@JsonView(JsonViews.Common.class)
 	private int number;
 
 	@Column(name = "street")
+	@JsonView(JsonViews.Common.class)
 	private String street;
 
 	@Column(name = "zipCode")
+	@JsonView(JsonViews.Common.class)
 	private String zipCode;
 
 	@Column(name = "city")
+	@JsonView(JsonViews.Common.class)
 	private String city;
 
 	@Column(name = "country")
+	@JsonView(JsonViews.Common.class)
 	private String country;
 
 	public Adresse() {

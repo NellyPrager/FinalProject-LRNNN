@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -42,6 +43,12 @@ public class RessourceSalleController {
 	@JsonView(JsonViews.Common.class)
 	public ResponseEntity<List<Salle>> findAll() {
 		return new ResponseEntity<>(repositoryRoom.findAllRoom(), HttpStatus.OK);
+	}
+	
+	@GetMapping(path = { "available", "/available" })
+	@JsonView(JsonViews.Common.class)
+	public ResponseEntity<List<Salle>> findAllRoomAvailable(@RequestParam(name="availability") boolean availability) {
+		return new ResponseEntity<>(repositoryRoom.findAllRoomAvailable(availability), HttpStatus.OK);
 	}
 
 

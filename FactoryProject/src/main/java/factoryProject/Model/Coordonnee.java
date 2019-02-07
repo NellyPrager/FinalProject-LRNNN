@@ -3,13 +3,17 @@ package factoryProject.Model;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Embeddable
 public class Coordonnee {
 
 	@Column(name = "email")
+	@JsonView(JsonViews.Common.class)
 	private String email;
 
 	@Column(name = "phone")
+	@JsonView(JsonViews.Common.class)
 	private Long phone;
 
 	public Coordonnee() {

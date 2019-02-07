@@ -57,7 +57,7 @@ public abstract class Materiel {
 		this.price = price;
 	}
 
-	public boolean isAvailability() {
+	public boolean getAvailability() {
 		return availability;
 	}
 

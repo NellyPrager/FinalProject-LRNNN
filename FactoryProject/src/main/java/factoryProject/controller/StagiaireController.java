@@ -52,7 +52,7 @@ public class StagiaireController {
 		} else {
 			stagiaireRepository.save(stagiaire);
 			HttpHeaders header = new HttpHeaders();
-			header.setLocation(uCB.path("/rest/stagiaire/{id}").buildAndExpand(stagiaire.getId()).toUri());
+			header.setLocation(uCB.path("/stagiaire/{id}").buildAndExpand(stagiaire.getId()).toUri());
 			response = new ResponseEntity<>(header, HttpStatus.CREATED);
 		}
 		return response;
@@ -85,6 +85,10 @@ public class StagiaireController {
 				stagiaireEnBase.setName(stagiaire.getName());
 				stagiaireEnBase.setSurname(stagiaire.getSurname());
 				stagiaireEnBase.setAdress(stagiaire.getAdress());
+				stagiaireEnBase.setContact(stagiaire.getContact());
+				stagiaireEnBase.setComputer(stagiaire.getComputer());
+				stagiaireEnBase.setFormation(stagiaire.getFormation());
+				stagiaireEnBase.setTrainer(stagiaire.getTrainer());	
 				stagiaireRepository.save(stagiaireEnBase);
 				response = new ResponseEntity<Stagiaire>(stagiaireEnBase, HttpStatus.OK);
 			} else {

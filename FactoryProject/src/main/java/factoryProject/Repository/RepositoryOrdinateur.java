@@ -15,6 +15,7 @@ public interface RepositoryOrdinateur extends JpaRepository<Materiel, String>{
 	List<Ordinateur> findAllComputer() ;
 	
 	//@Query("select m, h from Materiel m, RessourceHumaine h where m.class='computer' and m.intern=:id")
-	@Query("select m, h.name, h.surname from Materiel m, RessourceHumaine h where m.class='computer' and m.intern is not null and h.class='stagiaire'")
+	//@Query("select m, h.name, h.surname from Materiel m, RessourceHumaine h where m.class='computer' and m.intern is not null and h.class='stagiaire'")
+	@Query("select m from Materiel m, RessourceHumaine h where m.class='computer' and m.intern is not null and h.class='stagiaire'")
 	List<Ordinateur> findAllComputerWithInterns();
 }

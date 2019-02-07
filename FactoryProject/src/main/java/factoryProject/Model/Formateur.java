@@ -36,6 +36,10 @@ public class Formateur extends RessourceHumaine {
 	@OneToOne(mappedBy = "trainer")
 	private Module module;
 
+	@Column(name = "availability")
+	@JsonView(JsonViews.Common.class)
+	private boolean availability;
+
 	@Enumerated(EnumType.STRING)
 	@JsonView(JsonViews.FormateurWithSubject.class)
 	private Competences skills;
@@ -44,7 +48,7 @@ public class Formateur extends RessourceHumaine {
 	}
 
 	public Formateur(String motDePasse, String username, List<MatiereFormateur> matieres, List<Creneau> creneau,
-			List<Stagiaire> intern, Module module, Competences skills) {
+			List<Stagiaire> intern, Module module, boolean availability, Competences skills) {
 		super();
 		this.motDePasse = motDePasse;
 		this.username = username;
@@ -52,7 +56,16 @@ public class Formateur extends RessourceHumaine {
 		this.creneau = creneau;
 		this.intern = intern;
 		this.module = module;
+		this.availability = availability;
 		this.skills = skills;
+	}
+
+	public boolean getAvailability() {
+		return availability;
+	}
+
+	public void setAvailability(boolean availability) {
+		this.availability = availability;
 	}
 
 	public Competences getSkills() {

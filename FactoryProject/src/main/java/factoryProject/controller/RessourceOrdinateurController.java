@@ -106,6 +106,8 @@ public class RessourceOrdinateurController {
 				ordinateurEnBase.setProcessor(computer.getProcessor());
 				ordinateurEnBase.setRam(computer.getRam());
 				ordinateurEnBase.setYear(computer.getYear());
+				ordinateurEnBase.setAvailability(computer.getAvailability());
+				ordinateurEnBase.setIntern(computer.getIntern());
 				repositoryComputer.save(ordinateurEnBase);
 				response = new ResponseEntity<Ordinateur>(ordinateurEnBase, HttpStatus.OK);
 			} else {

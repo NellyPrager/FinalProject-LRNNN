@@ -43,7 +43,7 @@ public class RessourceVideoProjecteurController {
 	}
 
 	@PostMapping(path = { "", "/" })
-	public ResponseEntity<Void> createProjector(@Valid @RequestBody Materiel videoProjector, BindingResult br,
+	public ResponseEntity<Void> createProjector(@Valid @RequestBody VideoProjecteur videoProjector, BindingResult br,
 			UriComponentsBuilder uCB) {
 		ResponseEntity<Void> response = null;
 		if (br.hasErrors()) {
@@ -84,6 +84,9 @@ public class RessourceVideoProjecteurController {
 			if (opt.isPresent()) {
 				VideoProjecteur videoProjectorEnBase = (VideoProjecteur) opt.get();
 				videoProjectorEnBase.setRoom(videoProjector.getRoom());
+				videoProjectorEnBase.setCode(videoProjector.getCode());
+				videoProjectorEnBase.setPrice(videoProjector.getPrice());
+				videoProjectorEnBase.setAvailability(videoProjector.getAvailability());
 
 				repositoryVideoProjector.save(videoProjectorEnBase);
 				response = new ResponseEntity<VideoProjecteur>(videoProjectorEnBase, HttpStatus.OK);

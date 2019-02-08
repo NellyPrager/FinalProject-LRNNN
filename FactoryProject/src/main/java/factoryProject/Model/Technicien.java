@@ -13,23 +13,23 @@ public class Technicien extends RessourceHumaine {
 	private String username;
 
 	@Column(name = "password")
-	private String motDePasse;
+	private String password;
 
-	public Technicien(String username, String motDePasse) {
+	public Technicien(String username, String password) {
 		super();
 		this.username = username;
-		this.motDePasse = motDePasse;
+		this.password = password;
 	}
 
 	public Technicien() {
 	}
 
-	public String getMotDePasse() {
-		return motDePasse;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setMotDePasse(String motDePasse) {
-		this.motDePasse = motDePasse;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getUsername() {

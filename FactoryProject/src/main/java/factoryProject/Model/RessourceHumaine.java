@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -39,18 +41,31 @@ public abstract class RessourceHumaine {
 	@JsonView(JsonViews.Common.class)
 	private Coordonnee contact;
 
+	@Enumerated(EnumType.STRING)
+	@JsonView(JsonViews.Common.class)
+	private TypeUtilisateur userType;
+
 	@Version
 	private int version;
 
 	public RessourceHumaine() {
 	}
 
-	public RessourceHumaine(String surname, String name, Adresse adress, Coordonnee contact) {
+	public RessourceHumaine(String surname, String name, Adresse adress, Coordonnee contact, TypeUtilisateur userType) {
 		super();
 		this.surname = surname;
 		this.name = name;
 		this.adress = adress;
 		this.contact = contact;
+		this.userType = userType;
+	}
+
+	public TypeUtilisateur getUserType() {
+		return userType;
+	}
+
+	public void setUserType(TypeUtilisateur userType) {
+		this.userType = userType;
 	}
 
 	public Long getId() {
